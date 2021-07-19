@@ -1,0 +1,7 @@
+services:
+
+  # The Omnipedia user import service.
+  omnipedia_user_import.user_import:
+    class: Drupal\omnipedia_user_import\Service\UserImport
+    arguments:
+      - '@entity_type.manager'

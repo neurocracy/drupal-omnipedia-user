@@ -1,0 +1,26 @@
+{
+  "name": "drupal/omnipedia_user_import",
+  "description": "Omnipedia - User import",
+  "type": "project",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Ambient.Impact",
+      "homepage": "https://ambientimpact.com/",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "drupal/bulk_user_registration": "^1.1@beta"
+  },
+  "require-dev": {
+  },
+  "extra": {
+    "patches": {
+      "drupal/bulk_user_registration": {
+        "Allow Updating Existing Users [#3202593]: https://www.drupal.org/project/bulk_user_registration/issues/3202593#comment-14110991 ": "https://www.drupal.org/files/issues/2021-05-21/bulk_user_registration-update_existing_users-3202593-4.patch",
+        "Add hook_bulk_user_registration_user_postsave() [#3224168]: https://www.drupal.org/project/bulk_user_registration/issues/3224168 ": "https://git.drupalcode.org/project/bulk_user_registration/-/merge_requests/2.patch"
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+<?php
+
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_bulk_user_registration_user_presave().
+ */
+function omnipedia_user_import_bulk_user_registration_user_presave(
+  UserInterface $user, array $data
+): void {
+  \Drupal::service('omnipedia_user_import.user_import')
+    ->bulkUserRegistrationPreSave($user, $data);
+}
+
+/**
+ * Implements hook_bulk_user_registration_user_postsave().
+ */
+function omnipedia_user_import_bulk_user_registration_user_postsave(
+  UserInterface $user, array $data
+): void {
+  \Drupal::service('omnipedia_user_import.user_import')
+    ->bulkUserRegistrationPostSave($user, $data);
+}
+
+/**
+ * Implements hook_bulk_user_registration_extra_fields().
+ */
+function omnipedia_user_import_bulk_user_registration_extra_fields(): array {
+  return [
+    \Drupal::service('omnipedia_user_import.user_import')
+      ->getActionsFieldName(),
+  ];
+}
