@@ -1,0 +1,30 @@
+<?php
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_help().
+ */
+function omnipedia_user_help(
+  string $routeName, RouteMatchInterface $routeMatch
+) {
+
+  switch ($routeName) {
+    case 'user.login':
+    case 'user.pass':
+
+      /** @var \Drupal\Core\Utility\LinkGeneratorInterface The Drupal link generator service. */
+      $linkGenerator = \Drupal::service('link_generator');
+
+      return '<p>'. \t(
+        'Don\'t have an account? You can acquire one by @joining.',
+        ['@joining' => $linkGenerator->generate(
+          \t('joining Omnipedia'),
+          Url::fromUserInput('/join')
+        )]
+      ) . '</p>';
+
+  }
+
+}

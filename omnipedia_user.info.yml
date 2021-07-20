@@ -1,0 +1,8 @@
+name: Omnipedia - User
+type: module
+description: Provides user-functionality for Omnipedia.
+package: Omnipedia
+core_version_requirement: ^8 || ^9
+
+dependencies:
+  - drupal:user
