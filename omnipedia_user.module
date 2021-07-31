@@ -1,7 +1,6 @@
 <?php
 
 use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\Core\Url;
 
 /**
  * Implements hook_help().
@@ -14,6 +13,25 @@ function omnipedia_user_help(
     case 'user.login':
     case 'user.pass':
 
+      /** @var \Drupal\omnipedia_commerce\Service\ContentAccessProductInterface */
+      $contentAccessProduct = \Drupal::service(
+        'omnipedia_commerce.content_access_product'
+      );
+
+      /** @var \Drupal\Core\Session\AccountInterface */
+      $currentUser = \Drupal::service('current_user');
+
+      /** @var \Drupal\commerce_product\Entity\ProductInterface|null */
+      $product = $contentAccessProduct->getBaseProduct();
+
+      // Don't render anything if the base product has not been configured.
+      if (
+        !\is_object($product) ||
+        !$product->access('view', $currentUser)
+      ) {
+        return '';
+      }
+
       /** @var \Drupal\Core\Utility\LinkGeneratorInterface The Drupal link generator service. */
       $linkGenerator = \Drupal::service('link_generator');
 
@@ -21,7 +39,7 @@ function omnipedia_user_help(
         'Don\'t have an account? You can acquire one by @joining.',
         ['@joining' => $linkGenerator->generate(
           \t('joining Omnipedia'),
-          Url::fromUserInput('/join')
+          $product->toUrl()
         )]
       ) . '</p>';
 
