@@ -1,5 +1,9 @@
 services:
 
+  # The Omnipedia user roles service.
+  omnipedia.user_roles:
+    class: Drupal\omnipedia_user\Service\UserRoles
+
   # Event subscriber to alter Password Policy elements on the user edit form.
   omnipedia_user.form_user_form_password_policy_alter_event_subscriber:
     class: Drupal\omnipedia_user\EventSubscriber\Form\UserFormPasswordPolicyFormAlterEventSubscriber
