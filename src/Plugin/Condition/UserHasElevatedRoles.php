@@ -10,7 +10,7 @@ use Drupal\user\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides a 'User has elevated roles(s)' condition.
+ * Provides a 'User has elevated role(s)' condition.
  *
  * @Condition(
  *   id       = "omnipedia_user_has_elevated_roles",
@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   context_definitions = {
  *     "user" = @ContextDefinition("entity:user",
  *       label        = @Translation("User"),
- *       description  = @Translation("Specifies the user account to check."),
+ *       description  = @Translation("The user account to check."),
  *     ),
  *   }
  * )
