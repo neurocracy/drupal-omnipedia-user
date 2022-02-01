@@ -18,8 +18,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   category = @Translation("User"),
  *   context_definitions = {
  *     "user" = @ContextDefinition("entity:user",
- *       label        = @Translation("User"),
- *       description  = @Translation("The user account to check."),
+ *       label                  = @Translation("User"),
+ *       description            = @Translation("The user account to check."),
+ *       assignment_restriction = "selector",
+ *       default_value          = "user",
  *     ),
  *   }
  * )
