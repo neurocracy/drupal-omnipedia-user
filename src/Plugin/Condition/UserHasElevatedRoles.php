@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Provides a 'User has elevated roles(s)' condition.
  *
  * @Condition(
- *   id       = "omnipedia_user_has_elevated_role",
+ *   id       = "omnipedia_user_has_elevated_roles",
  *   label    = @Translation("User has elevated role(s)"),
  *   category = @Translation("User"),
  *   context_definitions = {
@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   }
  * )
  */
-class UserHasElevatedRole extends RulesConditionBase implements ContainerFactoryPluginInterface {
+class UserHasElevatedRoles extends RulesConditionBase implements ContainerFactoryPluginInterface {
 
   /**
    * The Omnipedia user roles service interface.
