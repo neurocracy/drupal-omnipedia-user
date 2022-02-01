@@ -1,5 +1,11 @@
 services:
 
+  # The user with elevated role(s) logger channel.
+  logger.channel.omnipedia_user_roles_elevated:
+    class: Drupal\Core\Logger\LoggerChannel
+    factory: logger.factory:get
+    arguments: ['omnipedia_user_roles_elevated']
+
   # The Omnipedia user roles service.
   omnipedia.user_roles:
     class: Drupal\omnipedia_user\Service\UserRoles
