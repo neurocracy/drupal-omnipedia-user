@@ -15,3 +15,11 @@ services:
     class: Drupal\omnipedia_user\EventSubscriber\Form\UserFormPasswordPolicyFormAlterEventSubscriber
     tags:
       - { name: 'event_subscriber' }
+
+  # Event subscriber to perform actions relating to users with elevated role(s).
+  omnipedia_user.user_elevated_role_event_subscriber:
+    class: Drupal\omnipedia_user\EventSubscriber\Omnipedia\UserElevatedRolesEventSubscriber
+    arguments:
+      - '@logger.channel.omnipedia_user_roles_elevated'
+    tags:
+      - { name: 'event_subscriber' }
