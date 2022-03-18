@@ -18,7 +18,7 @@ function omnipedia_user_help(
         'omnipedia_commerce.content_access_product'
       );
 
-      /** @var \Drupal\Core\Session\AccountInterface */
+      /** @var \Drupal\Core\Session\AccountProxyInterface */
       $currentUser = \Drupal::service('current_user');
 
       /** @var \Drupal\commerce_product\Entity\ProductInterface|null */
