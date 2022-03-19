@@ -6,6 +6,14 @@ services:
     factory: logger.factory:get
     arguments: ['omnipedia_user_roles_elevated']
 
+  # The Omnipedia user help service.
+  omnipedia_user.help:
+    class: Drupal\omnipedia_user\Service\Help
+    arguments:
+      - '@current_user'
+      - '@omnipedia_commerce.content_access_product'
+      - '@string_translation'
+
   # The Omnipedia user roles service.
   omnipedia.user_roles:
     class: Drupal\omnipedia_user\Service\UserRoles
