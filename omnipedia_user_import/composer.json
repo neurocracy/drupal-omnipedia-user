@@ -13,8 +13,6 @@
   "require": {
     "drupal/bulk_user_registration": "^1.1@beta"
   },
-  "require-dev": {
-  },
   "extra": {
     "patches": {
       "drupal/bulk_user_registration": {
