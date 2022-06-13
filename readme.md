@@ -1,5 +1,5 @@
-This contains the source files for the "[Omnipedia](https://omnipedia.app/) -
-User" Drupal module.
+This contains the source files for the "*Omnipedia - User*" Drupal module, which
+provides user-related functionality for [Omnipedia](https://omnipedia.app/).
 
 ⚠️⚠️⚠️ ***Here be potential spoilers. Proceed at your own risk.*** ⚠️⚠️⚠️
 
