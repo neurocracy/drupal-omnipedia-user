@@ -86,7 +86,8 @@ class Help implements HelpInterface {
     /** @var \Drupal\commerce_product\Entity\ProductInterface|null */
     $product = $this->contentAccessProduct->getBaseProduct();
 
-    // Don't render anything if the base product has not been configured.
+    // Don't render anything if the base product has not been configured or the
+    // user does not have access to it.
     if (
       !\is_object($product) ||
       !$product->access('view', $this->currentUser)
