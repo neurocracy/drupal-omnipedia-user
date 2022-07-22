@@ -8,14 +8,18 @@ use Drupal\Core\Routing\RouteMatchInterface;
 function omnipedia_user_help(
   string $routeName, RouteMatchInterface $routeMatch
 ) {
+
   return \Drupal::service('omnipedia_user.help')->help($routeName, $routeMatch);
+
 }
 
 /**
  * Implements \hook_page_attachments_alter().
  */
 function omnipedia_user_page_attachments_alter(array &$variables): void {
+
   \Drupal::service(
     'omnipedia_user.eu_cookie_compliance_page_attachments_alter'
   )->alter($variables);
+
 }
