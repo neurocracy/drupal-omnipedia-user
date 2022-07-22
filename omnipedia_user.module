@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Component\Render\MarkupInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
@@ -7,7 +8,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
  */
 function omnipedia_user_help(
   string $routeName, RouteMatchInterface $routeMatch
-) {
+): MarkupInterface|array|string {
 
   return \Drupal::service('omnipedia_user.help')->help($routeName, $routeMatch);
 
