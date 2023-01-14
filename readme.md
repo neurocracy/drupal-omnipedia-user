@@ -27,7 +27,7 @@ part of this codebase is useful or will inspire someone out there.
 
 Follow the Composer installation instructions for these dependencies first:
 
-* The [`omnipedia_core` module](https://github.com/neurocracy/drupal-omnipedia-core).
+* The `omnipedia_commerce` (not currently open source) and [`omnipedia_core`](https://github.com/neurocracy/drupal-omnipedia-core) modules.
 
 ----
 
