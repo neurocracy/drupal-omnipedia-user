@@ -17,7 +17,7 @@ abstract class AbstractUserElevatedRolesChangedEvent extends AbstractUserElevate
    *
    * @var \Drupal\user\UserInterface
    */
-  protected $unchangedUser;
+  protected UserInterface $unchangedUser;
 
   /**
    * {@inheritdoc}

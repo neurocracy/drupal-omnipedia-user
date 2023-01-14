@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Drupal\omnipedia_user_import\Service;
 
 use Drupal\bulk_user_registration\BulkUserRegistrationInterface;
+use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\user\UserStorageInterface;
 use Drupal\user\UserInterface;
 
 /**
@@ -34,14 +36,14 @@ class UserImport {
    *
    * @var \Drupal\Core\Entity\EntityStorageInterface
    */
-  protected $actionStorage;
+  protected EntityStorageInterface $actionStorage;
 
   /**
    * The Drupal user entity storage.
    *
    * @var \Drupal\user\UserStorageInterface
    */
-  protected $userStorage;
+  protected UserStorageInterface $userStorage;
 
   /**
    * Service constructor; saves dependencies.

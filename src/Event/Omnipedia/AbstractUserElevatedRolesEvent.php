@@ -17,7 +17,7 @@ abstract class AbstractUserElevatedRolesEvent extends Event {
    *
    * @var \Drupal\user\UserInterface
    */
-  protected $user;
+  protected UserInterface $user;
 
   /**
    * Constructs this event object.

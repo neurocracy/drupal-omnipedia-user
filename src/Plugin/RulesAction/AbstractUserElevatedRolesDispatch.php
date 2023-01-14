@@ -19,7 +19,7 @@ abstract class AbstractUserElevatedRolesDispatch extends RulesActionBase impleme
    *
    * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
    */
-  protected $eventDispatcher;
+  protected EventDispatcherInterface $eventDispatcher;
 
   /**
    * {@inheritdoc}

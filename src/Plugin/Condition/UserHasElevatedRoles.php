@@ -35,7 +35,7 @@ class UserHasElevatedRoles extends RulesConditionBase implements ContainerFactor
    *
    * @var \Drupal\omnipedia_user\Service\UserRolesInterface
    */
-  protected $userRoles;
+  protected UserRolesInterface $userRoles;
 
   /**
    * {@inheritdoc}

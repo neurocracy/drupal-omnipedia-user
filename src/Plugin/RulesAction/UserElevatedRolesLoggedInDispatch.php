@@ -34,7 +34,7 @@ class UserElevatedRolesLoggedInDispatch extends RulesActionBase implements Conta
    *
    * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
    */
-  protected $eventDispatcher;
+  protected EventDispatcherInterface $eventDispatcher;
 
   /**
    * {@inheritdoc}

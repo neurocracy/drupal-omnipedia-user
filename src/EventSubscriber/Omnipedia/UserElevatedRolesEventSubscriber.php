@@ -28,7 +28,7 @@ class UserElevatedRolesEventSubscriber implements EventSubscriberInterface {
    *
    * @var \Psr\Log\LoggerInterface
    */
-  protected $loggerChannel;
+  protected LoggerInterface $loggerChannel;
 
   /**
    * Event subscriber constructor; saves dependencies.

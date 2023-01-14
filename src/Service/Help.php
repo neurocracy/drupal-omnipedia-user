@@ -25,14 +25,14 @@ class Help implements HelpInterface {
    *
    * @var \Drupal\Core\Session\AccountProxyInterface
    */
-  protected $currentUser;
+  protected AccountProxyInterface $currentUser;
 
   /**
    * The Omnipedia content access product service.
    *
    * @var \Drupal\omnipedia_commerce\Service\ContentAccessProductInterface
    */
-  protected $contentAccessProduct;
+  protected ContentAccessProductInterface $contentAccessProduct;
 
   /**
    * Service constructor; saves dependencies.
