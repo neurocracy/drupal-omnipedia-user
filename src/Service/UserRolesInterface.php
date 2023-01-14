@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\omnipedia_user\Service;
 
 use Drupal\Core\Session\AccountInterface;

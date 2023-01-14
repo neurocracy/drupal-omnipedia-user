@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\omnipedia_user\Event\Omnipedia;
 
 use Drupal\omnipedia_user\Event\Omnipedia\AbstractUserElevatedRolesEvent;

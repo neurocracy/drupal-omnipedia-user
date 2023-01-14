@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\omnipedia_user\Plugin\Condition;
 
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;

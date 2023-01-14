@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\omnipedia_user_import\Service;
 
 use Drupal\bulk_user_registration\BulkUserRegistrationInterface;

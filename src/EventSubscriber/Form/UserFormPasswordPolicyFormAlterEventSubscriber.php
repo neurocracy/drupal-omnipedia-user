@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\omnipedia_user\EventSubscriber\Form;
 
 use Drupal\core_event_dispatcher\Event\Form\FormIdAlterEvent;

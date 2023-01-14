@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\omnipedia_user\EventSubscriber\Omnipedia;
 
 use Drupal\Core\Logger\RfcLogLevel;
@@ -103,8 +105,14 @@ class UserElevatedRolesEventSubscriber implements EventSubscriberInterface {
    *   The rendered link, suitable for the 'link' context for a log message.
    */
   protected function getUserLink(UserInterface $user): string {
-    return $user->toLink('View user', 'canonical', ['absolute' => true])
-      ->toString();
+
+    // \Drupal\Core\Link::toString() bafflingly does not return a string but an
+    // instance of \Drupal\Core\GeneratedLink which needs to be cast to a
+    // string.
+    return (string) $user->toLink(
+      'View user', 'canonical', ['absolute' => true]
+    )->toString();
+
   }
 
   /**
