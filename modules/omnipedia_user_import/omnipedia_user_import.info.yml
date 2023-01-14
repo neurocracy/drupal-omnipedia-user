@@ -6,3 +6,4 @@ core_version_requirement: ^9
 
 dependencies:
   - bulk_user_registration:bulk_user_registration
+  - drupal:user
