@@ -22,3 +22,9 @@ part of this codebase is useful or will inspire someone out there.
 * PHP 8
 
 * [Composer](https://getcomposer.org/)
+
+## Drupal dependencies
+
+Follow the Composer installation instructions for these dependencies first:
+
+* The [`omnipedia_core` module](https://github.com/neurocracy/drupal-omnipedia-core).
