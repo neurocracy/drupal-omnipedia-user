@@ -6,7 +6,6 @@ namespace Drupal\omnipedia_user\Service;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\omnipedia_core\Entity\NodeInterface;
 use Drupal\omnipedia_user\Service\PermissionHashesInterface;
 use Drupal\omnipedia_user\Service\RepresentativeRenderUserInterface;
 use Drupal\user\RoleStorageInterface;
@@ -138,7 +137,7 @@ class RepresentativeRenderUser implements RepresentativeRenderUserInterface {
    * @see https://stackoverflow.com/questions/28939367/check-if-a-column-contains-all-the-values-of-another-column-mysql
    */
   public function getUserToRenderAs(
-    array $roles, NodeInterface $node, NodeInterface $previousNode
+    array $roles, callable $accessCallback
   ): ?UserInterface {
 
     // If the anonymous user is requested, load and return it.
@@ -199,12 +198,8 @@ class RepresentativeRenderUser implements RepresentativeRenderUserInterface {
         }
       }
 
-      // Return the first user found that has access to both the current and
-      // previous wiki nodes.
-      if (
-        $node->access('view', $user) &&
-        $previousNode->access('view', $user)
-      ) {
+      // Return the first user found that returns true from the access callback.
+      if (\call_user_func_array($accessCallback, [$user]) === true) {
         return $user;
       }
 

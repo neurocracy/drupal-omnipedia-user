@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Drupal\omnipedia_user\Service;
 
-use Drupal\omnipedia_core\Entity\NodeInterface;
 use Drupal\user\UserInterface;
 
 /**
@@ -13,7 +12,7 @@ use Drupal\user\UserInterface;
 interface RepresentativeRenderUserInterface {
 
   /**
-   * Get a user to render the provided wiki nodes' changes as.
+   * Get a user to render something as.
    *
    * Since we need to generate multiple cache variations that vary per user
    * permissions, we need a representative user for each variation.
@@ -34,18 +33,20 @@ interface RepresentativeRenderUserInterface {
    * @param array $roles
    *   An array of role IDs (rids) to match to a user.
    *
-   * @param \Drupal\omnipedia_core\Entity\NodeInterface $node
-   *   The current wiki node revision. Used for access checking.
-   *
-   * @param \Drupal\omnipedia_core\Entity\NodeInterface $previousNode
-   *   The previous wiki node revision. Used for access checking.
+   * @param callable $accessCallback
+   *   A callable to perform access checking or other validation. The callable
+   *   is passed a user entity (\Drupal\user\UserInterface) with exactly the
+   *   roles provided in $roles and must return true if the user can be used,
+   *   i.e. can access something being rendered, or false to try the next
+   *   matching user. If no user can be found with the provided roles, the
+   *   callable won't be called.
    *
    * @return \Drupal\user\UserInterface|null
    *   Either a loaded user entity, or null if one can't be found that has only
    *   the provided $roles and has access to view both $node and $previousNode.
    */
   public function getUserToRenderAs(
-    array $roles, NodeInterface $node, NodeInterface $previousNode
+    array $roles, callable $accessCallback
   ): ?UserInterface;
 
 }
