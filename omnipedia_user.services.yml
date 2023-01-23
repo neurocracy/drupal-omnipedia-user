@@ -21,6 +21,15 @@ services:
       - '@omnipedia_commerce.content_access_product'
       - '@string_translation'
 
+  # The Omnipedia user permission hashes service.
+  omnipedia_user.permission_hashes:
+    class: Drupal\omnipedia_user\Service\PermissionHashes
+    arguments:
+      - '@cache.default'
+      - '@current_user'
+      - '@entity_type.manager'
+      - '@user_permissions_hash_generator'
+
   # The Omnipedia user roles service.
   omnipedia.user_roles:
     class: Drupal\omnipedia_user\Service\UserRoles
