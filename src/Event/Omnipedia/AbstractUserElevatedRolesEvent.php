@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Drupal\omnipedia_user\Event\Omnipedia;
 
 use Drupal\user\UserInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * User with elevated role(s) abstract event.
