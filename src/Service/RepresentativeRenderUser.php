@@ -150,6 +150,7 @@ class RepresentativeRenderUser implements RepresentativeRenderUserInterface {
 
     /** @var \Drupal\Core\Entity\Query\QueryInterface */
     $query = ($this->userStorage->getQuery())
+      ->accessCheck(true)
       ->condition('status', 1);
 
     // If the provided roles are empty or the only role is 'authenticated, we
