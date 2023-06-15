@@ -17,7 +17,7 @@ part of this codebase is useful or will inspire someone out there.
 
 # Requirements
 
-* [Drupal 9.5](https://www.drupal.org/download) ([Drupal 8 is end-of-life](https://www.drupal.org/psa-2021-11-30))
+* [Drupal 10](https://www.drupal.org/download) ([Drupal 8 is end-of-life](https://www.drupal.org/psa-2021-11-30))
 
 * PHP 8
 
@@ -60,7 +60,7 @@ In your root `composer.json`, add the following to the `"repositories"` section:
 ### Installing
 
 Once you've completed all of the above, run `composer require
-"drupal/omnipedia_user:4.x-dev@dev"` in the root of your project to have
+"drupal/omnipedia_user:5.x-dev@dev"` in the root of your project to have
 Composer install this and its required dependencies for you.
 
 ----
@@ -76,3 +76,7 @@ The following major version bumps indicate breaking changes:
   * Increases minimum version of [Hook Event Dispatcher](https://www.drupal.org/project/hook_event_dispatcher) to 3.1 and adds support for 4.0 which supports Drupal 10.
 
   * Removes the `omnipedia_user_import` module; you can still find it in the 3.x branch.
+
+* 5.x:
+
+  * Requires [Drupal 10](https://www.drupal.org/project/drupal/releases/10.0.0) due to non-backwards compatible change to [`\Drupal\Component\EventDispatcher\ContainerAwareEventDispatcher::dispatch()`](https://git.drupalcode.org/project/drupal/-/commit/7b324dd8f18919fc4d728bdb0afbcf27c8c02cb2#6e9d627c11801448b7a793c204471d8f951ae2fb).

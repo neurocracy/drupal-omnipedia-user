@@ -52,7 +52,7 @@ class UserElevatedRolesDeniedDispatch extends AbstractUserElevatedRolesDispatch 
     $event = new UserElevatedRolesDeniedEvent($user, $user_unchanged);
 
     $this->eventDispatcher->dispatch(
-      UserElevatedRolesEventInterface::DENIED, $event
+      $event, UserElevatedRolesEventInterface::DENIED
     );
 
   }

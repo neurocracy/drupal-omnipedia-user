@@ -80,7 +80,7 @@ class UserElevatedRolesLoggedInDispatch extends RulesActionBase implements Conta
     $event = new UserElevatedRolesLoggedInEvent($user);
 
     $this->eventDispatcher->dispatch(
-      UserElevatedRolesEventInterface::LOGGED_IN, $event
+      $event, UserElevatedRolesEventInterface::LOGGED_IN
     );
 
   }

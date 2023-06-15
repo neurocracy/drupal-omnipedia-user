@@ -52,7 +52,7 @@ class UserElevatedRolesChangedDispatch extends AbstractUserElevatedRolesDispatch
     $event = new UserElevatedRolesChangedEvent($user, $user_unchanged);
 
     $this->eventDispatcher->dispatch(
-      UserElevatedRolesEventInterface::CHANGED, $event
+      $event, UserElevatedRolesEventInterface::CHANGED
     );
 
   }

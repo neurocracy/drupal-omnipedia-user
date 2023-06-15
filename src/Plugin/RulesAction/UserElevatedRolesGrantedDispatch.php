@@ -52,7 +52,7 @@ class UserElevatedRolesGrantedDispatch extends AbstractUserElevatedRolesDispatch
     $event = new UserElevatedRolesGrantedEvent($user, $user_unchanged);
 
     $this->eventDispatcher->dispatch(
-      UserElevatedRolesEventInterface::GRANTED, $event
+      $event, UserElevatedRolesEventInterface::GRANTED
     );
 
   }
