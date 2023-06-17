@@ -3,6 +3,10 @@
   "description": "Omnipedia - User",
   "type": "drupal-custom-module",
   "license": "GPL-2.0-or-later",
+  "support": {
+    "docs": "https://github.com/neurocracy/drupal-omnipedia-user",
+    "source": "https://github.com/neurocracy/drupal-omnipedia-user"
+  },
   "authors": [
     {
       "name": "Ambient.Impact",
