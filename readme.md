@@ -28,7 +28,7 @@ part of this codebase is useful or will inspire someone out there.
 Before attempting to install this, you must add the Composer repositories as
 described in the installation instructions for these dependencies:
 
-* The `omnipedia_commerce` (not currently open source) and [`omnipedia_core`](https://github.com/neurocracy/drupal-omnipedia-core) modules.
+* The [`omnipedia_core` module](https://github.com/neurocracy/drupal-omnipedia-core).
 
 ----
 
@@ -60,7 +60,7 @@ In your root `composer.json`, add the following to the `"repositories"` section:
 ### Installing
 
 Once you've completed all of the above, run `composer require
-"drupal/omnipedia_user:5.x-dev@dev"` in the root of your project to have
+"drupal/omnipedia_user:6.x-dev@dev"` in the root of your project to have
 Composer install this and its required dependencies for you.
 
 ----
@@ -80,3 +80,7 @@ The following major version bumps indicate breaking changes:
 * 5.x:
 
   * Requires [Drupal 10](https://www.drupal.org/project/drupal/releases/10.0.0) due to non-backwards compatible change to [`\Drupal\Component\EventDispatcher\ContainerAwareEventDispatcher::dispatch()`](https://git.drupalcode.org/project/drupal/-/commit/7b324dd8f18919fc4d728bdb0afbcf27c8c02cb2#6e9d627c11801448b7a793c204471d8f951ae2fb).
+
+* 6.x:
+
+  * Removed all use of the `omnipedia_commerce` module and removed it from dependencies.

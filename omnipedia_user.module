@@ -6,17 +6,6 @@ use Drupal\Component\Render\MarkupInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
- * Implements \hook_help().
- */
-function omnipedia_user_help(
-  string $routeName, RouteMatchInterface $routeMatch
-): MarkupInterface|array|string {
-
-  return \Drupal::service('omnipedia_user.help')->help($routeName, $routeMatch);
-
-}
-
-/**
  * Implements \hook_page_attachments_alter().
  */
 function omnipedia_user_page_attachments_alter(array &$variables): void {
