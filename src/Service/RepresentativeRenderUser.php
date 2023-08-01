@@ -8,9 +8,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\omnipedia_user\Service\PermissionHashesInterface;
 use Drupal\omnipedia_user\Service\RepresentativeRenderUserInterface;
-use Drupal\user\RoleStorageInterface;
 use Drupal\user\UserInterface;
-use Drupal\user\UserStorageInterface;
 
 /**
  * The Omnipedia representative render user service.
@@ -27,25 +25,18 @@ class RepresentativeRenderUser implements RepresentativeRenderUserInterface {
   protected array $allRoles;
 
   /**
+   * The Drupal entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected EntityTypeManagerInterface $entityTypeManager;
+
+  /**
    * The Omnipedia permission hashes service.
    *
    * @var \Drupal\omnipedia_user\Service\PermissionHashesInterface
    */
   protected PermissionHashesInterface $permissionHashes;
-
-  /**
-   * The Drupal user role entity storage.
-   *
-   * @var \Drupal\user\RoleStorageInterface
-   */
-  protected RoleStorageInterface $roleStorage;
-
-  /**
-   * The Drupal user entity storage.
-   *
-   * @var \Drupal\user\UserStorageInterface
-   */
-  protected UserStorageInterface $userStorage;
 
   /**
    * Service constructor; saves dependencies.
@@ -61,9 +52,8 @@ class RepresentativeRenderUser implements RepresentativeRenderUserInterface {
     PermissionHashesInterface   $permissionHashes
   ) {
 
-    $this->permissionHashes = $permissionHashes;
-    $this->roleStorage = $entityTypeManager->getStorage('user_role');
-    $this->userStorage = $entityTypeManager->getStorage('user');
+    $this->entityTypeManager  = $entityTypeManager;
+    $this->permissionHashes   = $permissionHashes;
 
   }
 
@@ -86,7 +76,9 @@ class RepresentativeRenderUser implements RepresentativeRenderUserInterface {
     if (!isset($this->allRoles)) {
 
       /** @var \Drupal\user\RoleInterface[] */
-      $this->allRoles = $this->roleStorage->loadMultiple();
+      $this->allRoles = $this->entityTypeManager->getStorage(
+        'user_role'
+      )->loadMultiple();
 
       // Remove the 'anonymous' and 'authenticated' roles.
       foreach ([
@@ -145,11 +137,11 @@ class RepresentativeRenderUser implements RepresentativeRenderUserInterface {
       count($roles) === 1 &&
       $roles[0] === AccountInterface::ANONYMOUS_ROLE
     ) {
-      return $this->userStorage->load(0);
+      return $this->entityTypeManager->getStorage('user')->load(0);
     }
 
     /** @var \Drupal\Core\Entity\Query\QueryInterface */
-    $query = ($this->userStorage->getQuery())
+    $query = ($this->entityTypeManager->getStorage('user')->getQuery())
       ->accessCheck(true)
       ->condition('status', 1);
 
@@ -189,7 +181,7 @@ class RepresentativeRenderUser implements RepresentativeRenderUserInterface {
     foreach ($query->execute() as $uid) {
 
       /** @var \Drupal\user\UserInterface */
-      $user = $this->userStorage->load($uid);
+      $user = $this->entityTypeManager->getStorage('user')->load($uid);
 
       // Loop through the required roles and skip this user if they don't have
       // all of them. This is not

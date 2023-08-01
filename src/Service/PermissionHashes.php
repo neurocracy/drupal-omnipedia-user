@@ -10,9 +10,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Session\PermissionsHashGeneratorInterface;
 use Drupal\omnipedia_user\Service\PermissionHashesInterface;
-use Drupal\user\RoleStorageInterface;
 use Drupal\user\UserInterface;
-use Drupal\user\UserStorageInterface;
 
 /**
  * The Omnipedia user permission hashes service.
@@ -41,25 +39,18 @@ class PermissionHashes implements PermissionHashesInterface {
   protected AccountProxyInterface $currentUser;
 
   /**
+   * The Drupal entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected EntityTypeManagerInterface $entityTypeManager;
+
+  /**
    * The Drupal user permissions hash generator.
    *
    * @var \Drupal\Core\Session\PermissionsHashGeneratorInterface
    */
   protected PermissionsHashGeneratorInterface $permissionsHashGenerator;
-
-  /**
-   * The Drupal user role entity storage.
-   *
-   * @var \Drupal\user\RoleStorageInterface
-   */
-  protected RoleStorageInterface $roleStorage;
-
-  /**
-   * The Drupal user entity storage.
-   *
-   * @var \Drupal\user\UserStorageInterface
-   */
-  protected UserStorageInterface $userStorage;
 
   /**
    * Service constructor; saves dependencies.
@@ -85,9 +76,8 @@ class PermissionHashes implements PermissionHashesInterface {
 
     $this->cache = $cache;
     $this->currentUser = $currentUser;
+    $this->entityTypeManager = $entityTypeManager;
     $this->permissionsHashGenerator = $permissionsHashGenerator;
-    $this->roleStorage = $entityTypeManager->getStorage('user_role');
-    $this->userStorage = $entityTypeManager->getStorage('user');
 
   }
 
@@ -125,7 +115,7 @@ class PermissionHashes implements PermissionHashesInterface {
     }
 
     /** @var \Drupal\user\UserInterface[] */
-    $allUsers = $this->userStorage->loadMultiple();
+    $allUsers = $this->entityTypeManager->getStorage('user')->loadMultiple();
 
     /** @var string[] */
     $permissionHashes = [];
@@ -144,9 +134,11 @@ class PermissionHashes implements PermissionHashesInterface {
       Cache::PERMANENT,
       Cache::mergeTags(
         // Invalidated whenever any role is added/updated/deleted.
-        $this->roleStorage->getEntityType()->getListCacheTags(),
+        $this->entityTypeManager->getStorage('user_role')->getEntityType()
+          ->getListCacheTags(),
         // Invalidated whenever any user is added/updated/deleted.
-        $this->userStorage->getEntityType()->getListCacheTags()
+        $this->entityTypeManager->getStorage('user')->getEntityType()
+          ->getListCacheTags()
       )
     );
 
