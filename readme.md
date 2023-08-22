@@ -9,7 +9,7 @@ provides user-related functionality for [Omnipedia](https://omnipedia.app/).
 
 * [Drupal 10](https://www.drupal.org/download)
 
-* PHP 8
+* PHP 8.1
 
 * [Composer](https://getcomposer.org/)
 
