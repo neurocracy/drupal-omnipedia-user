@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Drupal\omnipedia_user\Service;
+namespace Drupal\omnipedia_user\Hooks;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Routing\AdminContext;
+use Drupal\hux\Attribute\Alter;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * EU Cookie Compliance \hook_page_attachments_alter() service.
- *
- * This is not implemented as a hook_event_dispatcher event subscriber because
- * at the time of writing it only provides a \hook_page_attachments() event but
- * not \hook_page_attachments_alter().
+ * EU Cookie Compliance hook implementations.
  *
  * The EU Cookie Compliance module introduced a change (very likely in 8.x-1.15)
  * that forces the banner markup to be attached even on admin pages when the
@@ -35,21 +34,7 @@ use Drupal\Core\Routing\AdminContext;
  *
  * @todo Remove this once we switch to another cookie/privacy pop-up.
  */
-class EuCookieCompliancePageAttachementsAlter {
-
-  /**
-   * The Drupal admin context service.
-   *
-   * @var \Drupal\Core\Routing\AdminContext
-   */
-  protected AdminContext $adminContext;
-
-  /**
-   * The Drupal configuration factory service.
-   *
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
-   */
-  protected ConfigFactoryInterface $configFactory;
+class EuCookieCompliance implements ContainerInjectionInterface {
 
   /**
    * Service constructor; saves dependencies.
@@ -61,21 +46,29 @@ class EuCookieCompliancePageAttachementsAlter {
    *   The Drupal admin context service.
    */
   public function __construct(
-    ConfigFactoryInterface  $configFactory,
-    AdminContext            $adminContext
-  ) {
-    $this->adminContext   = $adminContext;
-    $this->configFactory  = $configFactory;
-  }
+    protected readonly ConfigFactoryInterface $configFactory,
+    protected readonly AdminContext           $adminContext,
+  ) {}
 
   /**
-   * \hook_page_attachments_alter() callback.
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('config.factory'),
+      $container->get('router.admin_context'),
+    );
+  }
+
+  #[Alter('page_attachments')]
+  /**
+   * Implements \hook_page_attachments_alter().
    *
    * @param array &$attachments
    *   Array of all attachments provided by \hook_page_attachments()
    *   implementations.
    */
-  public function alter(array &$variables): void {
+  public function pageAttachmentsAlter(array &$variables): void {
 
     // Bail if not an admin route or the EU Cookie Compliance drupalSettings are
     // not present.

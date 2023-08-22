@@ -6,19 +6,6 @@ services:
     factory: logger.factory:get
     arguments: ['omnipedia_user_roles_elevated']
 
-  # EU Cookie Compliance \hook_page_attachments_alter() service.
-  omnipedia_user.eu_cookie_compliance_page_attachments_alter:
-    class: \Drupal\omnipedia_user\Service\EuCookieCompliancePageAttachementsAlter
-    arguments:
-      - '@config.factory'
-      - '@router.admin_context'
-
-  # The Omnipedia user help service.
-  omnipedia_user.help:
-    class: Drupal\omnipedia_user\Service\Help
-    arguments:
-      - '@string_translation'
-
   # The Omnipedia user permission hashes service.
   omnipedia_user.permission_hashes:
     class: Drupal\omnipedia_user\Service\PermissionHashes
