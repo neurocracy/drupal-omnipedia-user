@@ -38,7 +38,7 @@ class UserElevatedRolesLoggedInDispatch extends AbstractUserElevatedRolesDispatc
     $event = new UserElevatedRolesLoggedInEvent($user);
 
     $this->eventDispatcher->dispatch(
-      $event, UserElevatedRolesEventInterface::LOGGED_IN
+      $event, UserElevatedRolesEventInterface::LOGGED_IN,
     );
 
   }

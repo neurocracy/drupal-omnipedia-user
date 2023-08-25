@@ -40,7 +40,7 @@ class UserElevatedRolesBlockedDispatch extends AbstractUserElevatedRolesDispatch
     $event = new UserElevatedRolesBlockedEvent($user);
 
     $this->eventDispatcher->dispatch(
-      $event, UserElevatedRolesEventInterface::BLOCKED
+      $event, UserElevatedRolesEventInterface::BLOCKED,
     );
 
   }

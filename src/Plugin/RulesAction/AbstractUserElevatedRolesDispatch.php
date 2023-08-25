@@ -15,13 +15,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 abstract class AbstractUserElevatedRolesDispatch extends RulesActionBase implements ContainerFactoryPluginInterface {
 
   /**
-   * The Symfony event dispatcher service.
-   *
-   * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
-   */
-  protected EventDispatcherInterface $eventDispatcher;
-
-  /**
    * {@inheritdoc}
    *
    * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
@@ -29,12 +22,10 @@ abstract class AbstractUserElevatedRolesDispatch extends RulesActionBase impleme
    */
   public function __construct(
     array $configuration, $pluginId, $pluginDefinition,
-    EventDispatcherInterface $eventDispatcher
+    protected readonly EventDispatcherInterface $eventDispatcher,
   ) {
 
     parent::__construct($configuration, $pluginId, $pluginDefinition);
-
-    $this->eventDispatcher = $eventDispatcher;
 
   }
 
@@ -43,13 +34,13 @@ abstract class AbstractUserElevatedRolesDispatch extends RulesActionBase impleme
    */
   public static function create(
     ContainerInterface $container,
-    array $configuration, $pluginId, $pluginDefinition
+    array $configuration, $pluginId, $pluginDefinition,
   ) {
     return new static(
       $configuration,
       $pluginId,
       $pluginDefinition,
-      $container->get('event_dispatcher')
+      $container->get('event_dispatcher'),
     );
   }
 

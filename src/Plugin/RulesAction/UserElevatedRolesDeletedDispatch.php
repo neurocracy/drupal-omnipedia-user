@@ -40,7 +40,7 @@ class UserElevatedRolesDeletedDispatch extends AbstractUserElevatedRolesDispatch
     $event = new UserElevatedRolesDeletedEvent($user);
 
     $this->eventDispatcher->dispatch(
-      $event, UserElevatedRolesEventInterface::DELETED
+      $event, UserElevatedRolesEventInterface::DELETED,
     );
 
   }

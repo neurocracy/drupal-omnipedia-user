@@ -45,14 +45,14 @@ class UserElevatedRolesDeniedDispatch extends AbstractUserElevatedRolesDispatch 
    */
   protected function doExecute(
     UserInterface $user,
-    UserInterface $user_unchanged
+    UserInterface $user_unchanged,
   ) {
 
     /** @var \Drupal\omnipedia_user\Event\Omnipedia\UserElevatedRolesDeniedEvent */
     $event = new UserElevatedRolesDeniedEvent($user, $user_unchanged);
 
     $this->eventDispatcher->dispatch(
-      $event, UserElevatedRolesEventInterface::DENIED
+      $event, UserElevatedRolesEventInterface::DENIED ,
     );
 
   }

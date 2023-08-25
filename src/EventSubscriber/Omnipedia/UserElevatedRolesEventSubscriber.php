@@ -24,23 +24,14 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class UserElevatedRolesEventSubscriber implements EventSubscriberInterface {
 
   /**
-   * Our logger channel.
-   *
-   * @var \Psr\Log\LoggerInterface
-   */
-  protected LoggerInterface $loggerChannel;
-
-  /**
    * Event subscriber constructor; saves dependencies.
    *
    * @param \Psr\Log\LoggerInterface $loggerChannel
    *   Our logger channel.
    */
   public function __construct(
-    LoggerInterface $loggerChannel
-  ) {
-    $this->loggerChannel = $loggerChannel;
-  }
+    protected readonly LoggerInterface $loggerChannel,
+  ) {}
 
   /**
    * {@inheritdoc}
@@ -78,7 +69,7 @@ class UserElevatedRolesEventSubscriber implements EventSubscriberInterface {
   protected function log(
     string $message, array $context = [],
     UserInterface $user,
-    string|int $severity = RfcLogLevel::NOTICE
+    string|int $severity = RfcLogLevel::NOTICE,
   ): void {
 
     // Add a link to the user if not set.
@@ -110,7 +101,7 @@ class UserElevatedRolesEventSubscriber implements EventSubscriberInterface {
     // instance of \Drupal\Core\GeneratedLink which needs to be cast to a
     // string.
     return (string) $user->toLink(
-      'View user', 'canonical', ['absolute' => true]
+      'View user', 'canonical', ['absolute' => true],
     )->toString();
 
   }
@@ -124,7 +115,7 @@ class UserElevatedRolesEventSubscriber implements EventSubscriberInterface {
   public function onBlocked(UserElevatedRolesBlockedEvent $event): void {
 
     $this->log(
-      'A user with elevated roles was blocked: %name', [], $event->getUser()
+      'A user with elevated roles was blocked: %name', [], $event->getUser(),
     );
 
   }
@@ -165,7 +156,7 @@ class UserElevatedRolesEventSubscriber implements EventSubscriberInterface {
         '%rolesAdded'   => $rolesAdded,
         '%rolesRemoved' => $rolesRemoved,
       ],
-      $targetUser
+      $targetUser,
     );
 
   }
@@ -179,7 +170,7 @@ class UserElevatedRolesEventSubscriber implements EventSubscriberInterface {
   public function onCreated(UserElevatedRolesCreatedEvent $event): void {
 
     $this->log(
-      'A user with elevated roles was created: %name', [], $event->getUser()
+      'A user with elevated roles was created: %name', [], $event->getUser(),
     );
 
   }
@@ -193,7 +184,7 @@ class UserElevatedRolesEventSubscriber implements EventSubscriberInterface {
   public function onDeleted(UserElevatedRolesDeletedEvent $event): void {
 
     $this->log(
-      'A user with elevated roles was deleted: %name', [], $event->getUser()
+      'A user with elevated roles was deleted: %name', [], $event->getUser(),
     );
 
   }
@@ -211,7 +202,7 @@ class UserElevatedRolesEventSubscriber implements EventSubscriberInterface {
       [
         '%roles'  => \implode(', ', $event->getRemovedRoles()),
       ],
-      $event->getUser()
+      $event->getUser(),
     );
 
   }
@@ -229,7 +220,7 @@ class UserElevatedRolesEventSubscriber implements EventSubscriberInterface {
       [
         '%roles'  => \implode(', ', $event->getAddedRoles()),
       ],
-      $event->getUser()
+      $event->getUser(),
     );
 
   }
@@ -243,7 +234,7 @@ class UserElevatedRolesEventSubscriber implements EventSubscriberInterface {
   public function onLoggedIn(UserElevatedRolesLoggedInEvent $event): void {
 
     $this->log(
-      'A user with elevated roles has logged in: %name', [], $event->getUser()
+      'A user with elevated roles has logged in: %name', [], $event->getUser(),
     );
 
   }
@@ -257,7 +248,7 @@ class UserElevatedRolesEventSubscriber implements EventSubscriberInterface {
   public function onUnblocked(UserElevatedRolesUnblockedEvent $event): void {
 
     $this->log(
-      'A user with elevated roles was unblocked: %name', [], $event->getUser()
+      'A user with elevated roles was unblocked: %name', [], $event->getUser(),
     );
 
   }

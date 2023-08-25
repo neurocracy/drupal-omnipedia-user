@@ -45,14 +45,14 @@ class UserElevatedRolesGrantedDispatch extends AbstractUserElevatedRolesDispatch
    */
   protected function doExecute(
     UserInterface $user,
-    UserInterface $user_unchanged
+    UserInterface $user_unchanged,
   ) {
 
     /** @var \Drupal\omnipedia_user\Event\Omnipedia\UserElevatedRolesGrantedEvent */
     $event = new UserElevatedRolesGrantedEvent($user, $user_unchanged);
 
     $this->eventDispatcher->dispatch(
-      $event, UserElevatedRolesEventInterface::GRANTED
+      $event, UserElevatedRolesEventInterface::GRANTED,
     );
 
   }

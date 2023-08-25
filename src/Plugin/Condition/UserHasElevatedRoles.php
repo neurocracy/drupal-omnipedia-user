@@ -31,13 +31,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class UserHasElevatedRoles extends RulesConditionBase implements ContainerFactoryPluginInterface {
 
   /**
-   * The Omnipedia user roles service interface.
-   *
-   * @var \Drupal\omnipedia_user\Service\UserRolesInterface
-   */
-  protected UserRolesInterface $userRoles;
-
-  /**
    * {@inheritdoc}
    *
    * @param \Drupal\omnipedia_user\Service\UserRolesInterface $userRoles
@@ -45,12 +38,10 @@ class UserHasElevatedRoles extends RulesConditionBase implements ContainerFactor
    */
   public function __construct(
     array $configuration, $pluginId, $pluginDefinition,
-    UserRolesInterface $userRoles
+    protected readonly UserRolesInterface $userRoles,
   ) {
 
     parent::__construct($configuration, $pluginId, $pluginDefinition);
-
-    $this->userRoles = $userRoles;
 
   }
 
@@ -65,7 +56,7 @@ class UserHasElevatedRoles extends RulesConditionBase implements ContainerFactor
       $configuration,
       $pluginId,
       $pluginDefinition,
-      $container->get('omnipedia.user_roles')
+      $container->get('omnipedia.user_roles'),
     );
   }
 

@@ -13,21 +13,12 @@ use Symfony\Contracts\EventDispatcher\Event;
 abstract class AbstractUserElevatedRolesEvent extends Event {
 
   /**
-   * The user account for which this event was triggered.
-   *
-   * @var \Drupal\user\UserInterface
-   */
-  protected UserInterface $user;
-
-  /**
    * Constructs this event object.
    *
    * @param \Drupal\user\UserInterface $user
    *   The user account for which this event was triggered.
    */
-  public function __construct(UserInterface $user) {
-    $this->user = $user;
-  }
+  public function __construct(protected readonly UserInterface $user) {}
 
   /**
    * Get the user account for which this event was triggered.

@@ -25,20 +25,6 @@ class RepresentativeRenderUser implements RepresentativeRenderUserInterface {
   protected array $allRoles;
 
   /**
-   * The Drupal entity type manager.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  protected EntityTypeManagerInterface $entityTypeManager;
-
-  /**
-   * The Omnipedia permission hashes service.
-   *
-   * @var \Drupal\omnipedia_user\Service\PermissionHashesInterface
-   */
-  protected PermissionHashesInterface $permissionHashes;
-
-  /**
    * Service constructor; saves dependencies.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
@@ -48,14 +34,9 @@ class RepresentativeRenderUser implements RepresentativeRenderUserInterface {
    *   The Omnipedia permission hashes service.
    */
   public function __construct(
-    EntityTypeManagerInterface  $entityTypeManager,
-    PermissionHashesInterface   $permissionHashes
-  ) {
-
-    $this->entityTypeManager  = $entityTypeManager;
-    $this->permissionHashes   = $permissionHashes;
-
-  }
+    protected readonly EntityTypeManagerInterface $entityTypeManager,
+    protected readonly PermissionHashesInterface  $permissionHashes,
+  ) {}
 
   /**
    * Get all roles.
@@ -77,7 +58,7 @@ class RepresentativeRenderUser implements RepresentativeRenderUserInterface {
 
       /** @var \Drupal\user\RoleInterface[] */
       $this->allRoles = $this->entityTypeManager->getStorage(
-        'user_role'
+        'user_role',
       )->loadMultiple();
 
       // Remove the 'anonymous' and 'authenticated' roles.
@@ -129,7 +110,7 @@ class RepresentativeRenderUser implements RepresentativeRenderUserInterface {
    * @see https://stackoverflow.com/questions/28939367/check-if-a-column-contains-all-the-values-of-another-column-mysql
    */
   public function getUserToRenderAs(
-    array $roles, callable $accessCallback
+    array $roles, callable $accessCallback,
   ): ?UserInterface {
 
     // If the anonymous user is requested, load and return it.
@@ -173,7 +154,7 @@ class RepresentativeRenderUser implements RepresentativeRenderUserInterface {
         ->condition(
           'roles',
           \array_diff(\array_keys($this->getAllRoles()), $roles),
-          'NOT IN'
+          'NOT IN',
         );
 
     }

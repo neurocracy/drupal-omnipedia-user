@@ -40,7 +40,7 @@ class UserElevatedRolesCreatedDispatch extends AbstractUserElevatedRolesDispatch
     $event = new UserElevatedRolesCreatedEvent($user);
 
     $this->eventDispatcher->dispatch(
-      $event, UserElevatedRolesEventInterface::CREATED
+      $event, UserElevatedRolesEventInterface::CREATED,
     );
 
   }

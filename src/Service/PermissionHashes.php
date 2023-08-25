@@ -25,34 +25,6 @@ class PermissionHashes implements PermissionHashesInterface {
   protected const CACHE_BIN = 'omnipedia_user_permission_hashes';
 
   /**
-   * The cache bin where user permission hashes are stored.
-   *
-   * @var \Drupal\Core\Cache\CacheBackendInterface
-   */
-  protected CacheBackendInterface $cache;
-
-  /**
-   * The current user proxy service.
-   *
-   * @var \Drupal\Core\Session\AccountProxyInterface
-   */
-  protected AccountProxyInterface $currentUser;
-
-  /**
-   * The Drupal entity type manager.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  protected EntityTypeManagerInterface $entityTypeManager;
-
-  /**
-   * The Drupal user permissions hash generator.
-   *
-   * @var \Drupal\Core\Session\PermissionsHashGeneratorInterface
-   */
-  protected PermissionsHashGeneratorInterface $permissionsHashGenerator;
-
-  /**
    * Service constructor; saves dependencies.
    *
    * @param \Drupal\Core\Cache\CacheBackendInterface $cache
@@ -68,18 +40,11 @@ class PermissionHashes implements PermissionHashesInterface {
    *   The Drupal user permissions hash generator.
    */
   public function __construct(
-    CacheBackendInterface             $cache,
-    AccountProxyInterface             $currentUser,
-    EntityTypeManagerInterface        $entityTypeManager,
-    PermissionsHashGeneratorInterface $permissionsHashGenerator
-  ) {
-
-    $this->cache = $cache;
-    $this->currentUser = $currentUser;
-    $this->entityTypeManager = $entityTypeManager;
-    $this->permissionsHashGenerator = $permissionsHashGenerator;
-
-  }
+    protected readonly CacheBackendInterface              $cache,
+    protected readonly AccountProxyInterface              $currentUser,
+    protected readonly EntityTypeManagerInterface         $entityTypeManager,
+    protected readonly PermissionsHashGeneratorInterface  $permissionsHashGenerator,
+  ) {}
 
   /**
    * {@inheritdoc}
@@ -139,7 +104,7 @@ class PermissionHashes implements PermissionHashesInterface {
         // Invalidated whenever any user is added/updated/deleted.
         $this->entityTypeManager->getStorage('user')->getEntityType()
           ->getListCacheTags()
-      )
+      ),
     );
 
     return $permissionHashes;

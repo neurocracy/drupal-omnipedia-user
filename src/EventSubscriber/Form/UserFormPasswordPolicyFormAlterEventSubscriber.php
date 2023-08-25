@@ -64,7 +64,7 @@ class UserFormPasswordPolicyFormAlterEventSubscriber implements EventSubscriberI
    *   The $form parameter with our alterations.
    */
   public function onProcess(
-    array $form, FormStateInterface $formState
+    array $form, FormStateInterface $formState,
   ): array {
 
     if (

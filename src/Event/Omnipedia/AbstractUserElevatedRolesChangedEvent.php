@@ -13,13 +13,6 @@ use Drupal\omnipedia_user\Event\Omnipedia\AbstractUserElevatedRolesEvent;
 abstract class AbstractUserElevatedRolesChangedEvent extends AbstractUserElevatedRolesEvent {
 
   /**
-   * The user account for which this event was triggered, before changes.
-   *
-   * @var \Drupal\user\UserInterface
-   */
-  protected UserInterface $unchangedUser;
-
-  /**
    * {@inheritdoc}
    *
    * @param \Drupal\user\UserInterface $unchangedUser
@@ -27,11 +20,11 @@ abstract class AbstractUserElevatedRolesChangedEvent extends AbstractUserElevate
    */
   public function __construct(
     UserInterface $user,
-    UserInterface $unchangedUser
+    protected readonly UserInterface $unchangedUser,
   ) {
+
     parent::__construct($user);
 
-    $this->unchangedUser = $unchangedUser;
   }
 
   /**
@@ -51,7 +44,7 @@ abstract class AbstractUserElevatedRolesChangedEvent extends AbstractUserElevate
    */
   public function getAddedRoles(): array {
     return \array_diff(
-      $this->user->getRoles(false), $this->unchangedUser->getRoles(false)
+      $this->user->getRoles(false), $this->unchangedUser->getRoles(false),
     );
   }
 
@@ -64,7 +57,7 @@ abstract class AbstractUserElevatedRolesChangedEvent extends AbstractUserElevate
    */
   public function getRemovedRoles(): array {
     return \array_diff(
-      $this->unchangedUser->getRoles(false), $this->user->getRoles(false)
+      $this->unchangedUser->getRoles(false), $this->user->getRoles(false),
     );
   }
 
