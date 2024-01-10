@@ -67,7 +67,7 @@ class UserElevatedRolesEventSubscriber implements EventSubscriberInterface {
    *   \Drupal\Core\Logger\RfcLogLevel::NOTICE
    */
   protected function log(
-    string $message, array $context = [],
+    string $message, array $context,
     UserInterface $user,
     string|int $severity = RfcLogLevel::NOTICE,
   ): void {
